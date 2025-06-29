@@ -27,7 +27,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  form_builder:
+  flutter_form_builder:
     git:
       url: https://github.com/beratyarici/flutter_form_builder.git
       ref: main
@@ -38,7 +38,7 @@ dependencies:
 ```dart
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/model/form_builder_model.dart';
-import 'package:flutter_form_builder/view/form_builder_view.dart';
+import 'package:form_builder/view/form_builder_view.dart';
 
 void main() {
   runApp(const MyApp());
