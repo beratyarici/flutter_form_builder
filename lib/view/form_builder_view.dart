@@ -73,10 +73,7 @@ class _FormBuilderViewState extends State<FormBuilderView> {
                       Text(
                         provider.title!,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                        ),
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
                     if (provider.description != null)
                       Text(
