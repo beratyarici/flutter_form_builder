@@ -76,7 +76,6 @@ class _FormBuilderViewState extends State<FormBuilderView> {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 24,
-                          color: Colors.black,
                         ),
                       ),
                     if (provider.description != null)
