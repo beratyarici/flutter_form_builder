@@ -34,10 +34,10 @@ class FormBuilderView extends StatefulWidget {
   });
 
   final FormBuilderModel form;
-  final Future<void> Function({
+  final Future<void> Function(
     Map<String, String> fields,
     Map<String, String> files,
-  })
+  )
   onSubmit;
 
   @override
@@ -165,8 +165,8 @@ class _FormBuilderViewState extends State<FormBuilderView> {
                                   provider.save();
 
                                   await widget.onSubmit(
-                                    fields: provider.fields,
-                                    files: provider.files,
+                                    provider.fields,
+                                    provider.files,
                                   );
                                 } finally {
                                   setState(() {
