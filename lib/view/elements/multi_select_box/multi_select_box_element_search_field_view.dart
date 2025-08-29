@@ -29,12 +29,17 @@ class _MultiSelectBoxElementSearchFieldViewState
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
         if (widget.multiSelectBoxElement.value != null) {
+          final selectedKeys =
+              (widget.multiSelectBoxElement.value?.toString() ?? '')
+                  .replaceAll('[', '')
+                  .replaceAll(']', '')
+                  .split(',')
+                  .map((e) => e.trim())
+                  .where((e) => e.isNotEmpty)
+                  .toList();
+
           final selectedItems = widget.multiSelectBoxElement.items
-              .where(
-                (element) =>
-                    (widget.multiSelectBoxElement.value as List<dynamic>)
-                        .contains(element.key),
-              )
+              .where((element) => selectedKeys.contains(element.key))
               .toList();
 
           _selectedItemList.addAll(selectedItems);
@@ -60,7 +65,7 @@ class _MultiSelectBoxElementSearchFieldViewState
       validator: (value) {
         if (widget.multiSelectBoxElement.required && value!.isEmpty) {
           return widget.multiSelectBoxElement.validation ??
-              'Lütfen bir seçim yapın'; // TODO l10n
+              'Bu alan boş bırakılamaz!'; // TODO l10n
         }
         return null;
       },
@@ -81,17 +86,21 @@ class _MultiSelectBoxElementSearchFieldViewState
               onSelected: (item) {
                 setState(() {
                   widget.multiSelectBoxElement.value ??= [];
+                  final selectedKeys =
+                      (widget.multiSelectBoxElement.value?.toString() ?? '')
+                          .replaceAll('[', '')
+                          .replaceAll(']', '')
+                          .split(',')
+                          .map((e) => e.trim())
+                          .where((e) => e.isNotEmpty)
+                          .toList();
 
-                  if (!(widget.multiSelectBoxElement.value as List<dynamic>)
-                      .contains(item.key)) {
-                    (widget.multiSelectBoxElement.value as List<dynamic>).add(
-                      item.key,
-                    );
+                  if (!(selectedKeys as List<dynamic>).contains(item.key)) {
+                    (selectedKeys as List<dynamic>).add(item.key);
 
                     _selectedItemList.add(item);
                   } else {
-                    (widget.multiSelectBoxElement.value as List<dynamic>)
-                        .remove(item.key);
+                    (selectedKeys as List<dynamic>).remove(item.key);
 
                     _selectedItemList.remove(item);
                   }
@@ -99,6 +108,8 @@ class _MultiSelectBoxElementSearchFieldViewState
                   _controller.text = _selectedItemList
                       .map((e) => e.label)
                       .join(', ');
+
+                  widget.multiSelectBoxElement.value = selectedKeys;
                 });
               },
             );
