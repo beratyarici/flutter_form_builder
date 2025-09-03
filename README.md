@@ -93,3 +93,7 @@ class MyApp extends StatelessWidget {
 
 ## Contact
 For any questions or issues, please open an issue on the [GitHub repository](https://github.com/beratyarici/flutter_form_builder/issues).
+
+## Acknowledgements
+This project was originally inspired by an idea from [İnan Yazılı](https://github.com/iyzl).  
+Special thanks to them for sharing the concept and guidance.
